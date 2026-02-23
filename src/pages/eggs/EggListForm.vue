@@ -10,6 +10,7 @@
             </div>
             <div class="h-auto">
                 <h2 class="text-m font-bold flex items-center gap-1"> <ClipboardList size="20" />Customize List</h2>
+                <p>Sample</p>
             </div>
         </div>
     </div>
