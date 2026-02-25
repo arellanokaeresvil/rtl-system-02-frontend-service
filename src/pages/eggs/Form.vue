@@ -3,7 +3,7 @@
         <ContentHeader title="Egg Production Form" description="Manage the production of eggs" :isCreateBtn="false" />
 
         <!-- Form -->
-         <div class="flex border justify-between border-gray-300 bg-white rounded-lg shadow-xl h-165">
+         <div class="flex border justify-between border-gray-300 bg-white rounded-lg shadow-xl h-auto max-h-200">
 
             <!-- Egg List Form -->
                 <EggListForm/>

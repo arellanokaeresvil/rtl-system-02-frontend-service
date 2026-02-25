@@ -19,7 +19,7 @@
         </div>
     </div>
     <!-- Recent Egg Production List -->
-    <div class="flex flex-col border border-gray-300 bg-white mt-7 h-80 rounded-lg shadow-lg cursor-pointer">
+    <div class="flex flex-col border border-gray-300 bg-white mt-7 h-auto max-h-200 rounded-lg shadow-lg cursor-pointer">
         <div class="flex pl-4 pt-4">
             <h2 class="text-m font-bold mb-2 flex items-center gap-1"> <CalendarDays size="20" /> Recent Production Records</h2>
             <!-- <p class="text-[12px] -mt-2.25 text-gray-600"> Egg production data for each day</p> -->
@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import Skeleton from '../../components/Skeleton.vue';
-import GridSummary from './Gridsummary.vue';
+import GridSummary from './GridSummary.vue';
 import { useEggStore } from '../../stores';
 import ContentHeader from '../../components/ContentHeader.vue';
 import RecentTable from './RecentTable.vue';
