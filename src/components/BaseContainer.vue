@@ -31,7 +31,7 @@
     </nav>
     
     <!-- Page content here -->
-    <div class="flex-1 p-6 bg-gray-100 overflow-y-auto">
+    <div class="flex-1 p-3 bg-gray-100 overflow-y-auto">
       <router-view />
     </div>
 

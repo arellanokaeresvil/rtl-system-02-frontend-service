@@ -1,13 +1,13 @@
 <template>
             <div class="flex-1 p-4 ">
-                <form class="flex flex-col gap-4 justify-between h-full m-2" @submit.prevent="handleSubmit">
+                <form class="flex flex-col gap-4  h-full m-2" @submit.prevent="handleSubmit()">
                     <div>
                         <h2 class="text-m font-bold flex items-center gap-1"> <BookPlus size="20" />Production Form</h2>
 
 
                         <fieldset class="fieldset">
                             <legend class="fieldset-legend">Batch</legend>
-                            <select class="select w-auto" v-model="form.batch_id">
+                            <select class="select validator w-auto" v-model="form.batch_id" required>
                                 <option class="border-b border-gray-300" disabled >Pick a batch</option>
                                 <option class=" md:text-[12px] border-b m-1 border-gray-300" v-for="batch in batchStore.batchOptions" :key="batch.id" :value="batch.id">
                                     {{ batch.batch_code }} - {{ batch.breed }}
@@ -22,7 +22,7 @@
 
                         <fieldset class="fieldset">
                             <legend class="fieldset-legend">Unit</legend>
-                            <select @change="handleChangeUnit()" class="select w-full" v-model="form.unit">
+                            <select @change="eggStore.unit = form.unit" class="select w-full" v-model="form.unit">
                                 <option class="border-b border-gray-300" disabled >Pick a unit</option>
                                 <option class="border-b border-gray-300" value="piece">Piece</option>
                                 <option class="border-b border-gray-300" value="tray">Tray</option>
@@ -30,8 +30,8 @@
                             </select>
                         </fieldset>
 
-                        <fieldset v-show="form.unit === 'piece'" class="fieldset">
-                            <legend class="fieldset-legend">Weight</legend>
+                        <fieldset v-if="form.unit === 'piece'" class="fieldset">
+                        <legend class="fieldset-legend">Weight</legend>
                         <input
                             type="number"
                             class="input validator w-full"
@@ -43,7 +43,7 @@
                         </fieldset>
 
 
-                        <fieldset v-show="form.unit === 'tray' || form.unit === 'custom'" class="fieldset">
+                        <fieldset v-if="form.unit === 'tray' || form.unit === 'custom'" class="fieldset">
                             <legend class="fieldset-legend">Grade</legend>
                             <select class="select w-full" v-model="form.grade">
                                 <option class="border-b border-gray-300" selected disabled >Pick a grade</option>
@@ -57,7 +57,7 @@
                             </select>
                         </fieldset>
 
-                        <fieldset v-show="form.unit === 'tray'" class="fieldset">
+                        <fieldset v-if="form.unit === 'tray'" class="fieldset">
                             <legend class="fieldset-legend">Tray</legend>
                         <input
                             type="number"
@@ -69,7 +69,7 @@
                             />
                         </fieldset>
 
-                        <fieldset v-show="form.unit === 'custom'" class="fieldset">
+                        <fieldset v-if="form.unit === 'custom'" class="fieldset">
                             <legend class="fieldset-legend">Total Eggs</legend>
                         <input
                             type="number"
@@ -89,7 +89,7 @@
                        
                     </div>
                     <div class="flex justify-end gap-4 mb-2">
-                        <button @click="handleSubmit" class="btn btn-black p-5"> <Plus size="20" /> Add</button >
+                        <button type="submit" class="btn btn-black p-5"> <Plus size="20" /> Add</button >
                     </div>
                      </form>
 
@@ -98,9 +98,11 @@
 
 <script setup lang="ts">
 import { onMounted, reactive } from 'vue';
-import { useBatchStore } from '../../stores';
+import { useBatchStore, useEggStore } from '../../stores';
 
 const batchStore = useBatchStore();
+const eggStore = useEggStore();
+
 
 interface ProductionFormState {
     batch_id: any,
@@ -124,14 +126,43 @@ const form = reactive<ProductionFormState>({
 
 onMounted(async () =>{
     await batchStore.getOptions();
+    eggStore.unit = form.unit;
 })
 
-const handleChangeUnit = () =>{
-
-}
-
 const handleSubmit = () => {
-    console.log('Form submitted:', form);
+    if(form.unit === 'custom'){
+        eggStore.addCustomize([{
+            egg_id: eggStore.custom_id,
+            batch_id: form.batch_id,
+            batch: batchStore.batchOptions?.find(option => option.id === form.batch_id)?.batch_code || '',
+            date_collected: form.date_collected,
+            grade: form.grade,
+            total: form.total_eggs
+        }])
+
+    }
+
+    if(form.unit === 'piece'){
+        eggStore.addPerPiece([{
+            egg_id: eggStore.piece_id,
+            batch_id: form.batch_id,
+            batch: batchStore.batchOptions?.find(option => option.id === form.batch_id)?.batch_code || '',
+            date_collected: form.date_collected,
+            weight_grams: form.weight_per_grams
+        }])
+    }
+
+    if(form.unit === 'tray'){
+        eggStore.addPerTray([{
+            egg_id: eggStore.tray_id,
+            batch_id: form.batch_id,
+            batch: batchStore.batchOptions?.find(option => option.id === form.batch_id)?.batch_code || '',
+            date_collected: form.date_collected,
+            grade: form.grade,
+            total: form.per_tray
+        }])
+    }
+
 }
 
 </script>
