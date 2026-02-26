@@ -7,7 +7,7 @@
             <table class="table table-s table-pin-rows table-pin-cols">
                 <thead>
                    <tr>
-                    <td>Date</td>
+                    <td>Date Collected</td>
                     <td>Batch Code</td>
                     <td>Jumbo</td>
                     <td>Extra Large</td>

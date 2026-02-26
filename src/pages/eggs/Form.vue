@@ -3,12 +3,13 @@
         <ContentHeader title="Egg Production Form" description="Manage the production of eggs" :isCreateBtn="false" />
 
         <!-- Form -->
-         <div class="flex border justify-between border-gray-300 bg-white rounded-lg shadow-xl h-auto max-h-200">
+         <div class="flex flex-col md:flex-row border justify-between border-gray-300 bg-white rounded-lg shadow-xl h-auto max-h-200">
 
+               <!-- Production Form -->
+                <ProductionForm />
             <!-- Egg List Form -->
                 <EggListForm/>
-            <!-- Production Form -->
-                <ProductionForm />
+         
          </div>
     </div>
 </template>
