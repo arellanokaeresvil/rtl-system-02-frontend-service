@@ -1,5 +1,5 @@
 <template>
-            <div class="flex-1 p-4 ">
+            <div class="flex-1 p-4 border-r-2 border-gray-300 ">
                 <form class="flex flex-col gap-4  h-full m-2" @submit.prevent="handleSubmit()">
                     <div>
                         <h2 class="text-m font-bold flex items-center gap-1"> <BookPlus size="20" />Production Form</h2>

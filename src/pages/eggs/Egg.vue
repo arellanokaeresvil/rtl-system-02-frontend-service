@@ -12,11 +12,13 @@
     <GridSummary />
 
     <!-- Weekly Chart Production -->
-    <div class="flex border border-gray-300 bg-white mt-7 h-80 rounded-lg shadow-lg">
-        <div class="flex-1 p-4">
+    <div class="flex flex-col md:flex-row border border-gray-300 bg-white mt-7 h-auto max-h-100 rounded-lg shadow-lg">
+
+        <div class="flex-1 p-4 border-r border-gray-300">
             <h2 class="text-m font-bold mb-2 flex items-center gap-1"> <Calendar size="20" /> Weekly Egg Production</h2>
             <p class="text-[12px] -mt-2.25 text-gray-600">Track egg production trends over the week</p>
         </div>
+        <AvailableEggs />
     </div>
     <!-- Recent Egg Production List -->
     <div class="flex flex-col border border-gray-300 bg-white mt-7 h-auto max-h-200 rounded-lg shadow-lg cursor-pointer">
@@ -25,6 +27,7 @@
             <!-- <p class="text-[12px] -mt-2.25 text-gray-600"> Egg production data for each day</p> -->
 
         </div>
+        
         <RecentTable />
  
     </div>
@@ -39,6 +42,7 @@ import GridSummary from './GridSummary.vue';
 import { useEggStore } from '../../stores';
 import ContentHeader from '../../components/ContentHeader.vue';
 import RecentTable from './RecentTable.vue';
+import AvailableEggs from './AvailableEggs.vue';
 
 const egg = useEggStore();
 

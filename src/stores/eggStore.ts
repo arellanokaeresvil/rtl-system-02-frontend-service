@@ -8,6 +8,7 @@ export const useEggStore = defineStore('egg',{
     state: () =>({
         datas: null as any,
         eggSummary: null as any,
+        eggAvailable: null as any,
         eggBatchSummary: null as any,
         totalEggSum: 0,
         loading: false as boolean,
@@ -25,7 +26,10 @@ export const useEggStore = defineStore('egg',{
     getters: {
         totalEggSummary: (state) => state.eggSummary?.reduce((total: number, item: any) => {
             return total + item.count
-        }, 0)
+        }, 0),
+        totalEggAvailable: (state) => state.eggAvailable?.reduce((total: number, item: any) => {
+            return total + item.count
+        }, 0),
     },
 
     actions: {
@@ -42,6 +46,19 @@ export const useEggStore = defineStore('egg',{
             }
 
         },
+        async fetchEggAvailable() {
+            this.loading = true;
+            try {
+                const res = await axios.get(`${baseURL}?getAvailableEgg`);
+                this.eggAvailable = res.data.data;
+            } catch (error) {
+                throw error;
+            } finally {
+                this.loading = false;
+            }
+
+        },
+
         async fetchEggPerBatch() {
             this.loading = true;
             try {

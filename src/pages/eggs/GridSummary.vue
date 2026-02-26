@@ -5,7 +5,7 @@
         <div class="bg-white border border-gray-300 rounded-lg p-6 shadow-lg flex justify-between items-center h-20">
             <div>
             <p class="text-[13px] text-gray-600">Total Production Today</p>
-            <p class="text-xl font-bold">{{ eggSum.totalEggSummary }}</p>
+            <p class="text-xl font-bold text-green-700">{{ eggSum.totalEggSummary?.toLocaleString() }}</p>
             </div>
             
         </div>
