@@ -54,6 +54,11 @@ const routes = [
                 component: () => import('../pages/feeds/Feed.vue')
             },
             {
+                path: '/feeds/create',
+                name: 'Create Feeds',
+                component: () => import('../pages/feeds/Form.vue')
+            },
+            {
                 path: '/expenses',
                 name: 'Expenses',
                 component: () => import('../pages/expenses/Expense.vue')
