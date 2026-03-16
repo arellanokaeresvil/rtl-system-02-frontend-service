@@ -109,7 +109,7 @@ export const useEggStore = defineStore('egg',{
                router.push('/egg-production')
 
             } catch (e) {
-                this.error = 'Failed submission'
+               throw e;
             } finally {
                 this.loading = false
             }

@@ -26,7 +26,10 @@ import {
     CalendarDays,
     Calendar,
     BookPlus,
-    ClipboardList
+    ClipboardList,
+    TriangleAlert,
+    Layers,
+    TrendingDown
 
 } from 'lucide-vue-next';
 
@@ -59,5 +62,8 @@ app.component("CalendarDays", CalendarDays),
 app.component("Calendar", Calendar)
 app.component("BookPlus", BookPlus)
 app.component("ClipboardList", ClipboardList)
+app.component("TriangleAlert", TriangleAlert)
+app.component("Layers", Layers)
+app.component("TrendingDown", TrendingDown)
 
 app.mount('#app')
