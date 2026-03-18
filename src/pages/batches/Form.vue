@@ -73,12 +73,12 @@
                             </select>
                         </fieldset>
                         <fieldset class="fieldset">
-                            <legend class="fieldset-legend">Daily Feed Per Bird</legend>
+                            <legend class="fieldset-legend">Daily Feed Per Bird (grams)</legend>
                             <input
                                 type="number"
                                 class="input validator w-full"
                                 required
-                                placeholder="Type daily feed per bird (per kg)..."
+                                placeholder="Type daily feed per bird (per grams)..."
                                 min="1"
                                 v-model="form.daily_feed_per_bird_kg"
                                 />

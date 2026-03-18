@@ -59,9 +59,19 @@ const routes = [
                 component: () => import('../pages/feeds/Form.vue')
             },
             {
+                path: 'feeds/list/:id',
+                name: 'Feeds List',
+                component: () => import('../pages/feeds/List.vue')
+            },
+            {
                 path: '/expenses',
                 name: 'Expenses',
                 component: () => import('../pages/expenses/Expense.vue')
+            },
+            {
+                path: '/sales',
+                name: 'Sales',
+                component: () => import('../pages/sale/Sale.vue')
             },
             {
                 path: '/users',
