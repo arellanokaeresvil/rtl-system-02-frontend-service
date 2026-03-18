@@ -36,7 +36,7 @@
         </div>
         <NoData v-show="batch.datas?.length === 0" />
         <div v-show="batch.datas?.length > 0" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-5">
-            <div v-for="data in batch.datas" :key="data.id" class="bg-card border border-gray-300 rounded-lg p-6 shadow-lg">
+            <div v-for="data in batch.datas" :key="data.id" class="bg-card border border-gray-300 rounded-lg p-6 shadow-lg bg-white">
 
                 <div class="flex justify-between mb-6">
                     <div>

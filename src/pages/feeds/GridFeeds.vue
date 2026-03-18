@@ -15,7 +15,9 @@
 
        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-5">
         <div class="cursor-pointer" v-for="value in feedStore.byTypeDatas" :key="value.type">
+           
             <div class="border rounded-lg bg-white border-gray-300 p-6 " v-if="value.total_quantity_kg > 200">
+                <router-link :to="`/feeds/list/${value.type}`">
                 <Layers size="24" />
 
                 <h1 class="font-bold text-lg pt-2">{{ value.type ?  value.type.charAt(0).toUpperCase() + value.type.slice(1) : '' }} Feeds</h1>
@@ -27,8 +29,11 @@
                 <div class="divider mt-[-6px] mb-[-2px]"></div>
                     <p class="text-sm text-gray-600 text-[12px]">Recent Supplier: {{ value.supplier }}</p>
                     <p class="text-sm text-gray-600 text-[12px]">Last Restock: {{ value.last_restock }}</p>
+                 </router-link>    
             </div>
+          
             <div class="border rounded-lg bg-white border-red-500 p-6" v-else>
+                <router-link :to="`/feeds/list/${value.type}`">
                 <div class="flex justify-between items-center">
                     <Layers size="24" /> <TriangleAlert size="20" class="text-red-700" />
                 </div>
@@ -42,38 +47,11 @@
                 <div class="divider mt-[-6px] mb-[-2px]"></div>
                     <p class="text-sm text-gray-600 text-[12px]">Recent Supplier: {{ value.supplier }}</p>
                     <p class="text-sm text-gray-600 text-[12px]">Last Restock: {{ value.last_restock }}</p>
+                </router-link>
             </div>
 
         </div>
             
-
-            <!-- <div class="border rounded-lg bg-white border-gray-300 p-6">
-                <Layers size="24" />
-
-                <h1 class="font-bold text-lg pt-2">Layer Feed</h1>
-                <h1 class="font-bold text-2xl mt-3">2,500 kg</h1>
-                <p class="text-sm text-gray-600 text-[12px]">Min. 1,000 kg</p>
-
-                <progress class="progress progress-success " value="70" max="100"></progress>
-
-                <div class="divider mt-[-6px] mb-[-2px]"></div>
-                    <p class="text-sm text-gray-600 text-[12px]">Supplier: Uncle Taks Farm Supply</p>   
-                    <p class="text-sm text-gray-600 text-[12px]">Last restock: 2024-06-01</p>   
-            </div> -->
-
-            <!-- <div class="border rounded-lg bg-white border-gray-300 p-6">
-                <Layers size="24" />
-
-                <h1 class="font-bold text-lg pt-2">Starter Feed</h1>
-                <h1 class="font-bold text-2xl mt-3">2,500 kg</h1>
-                <p class="text-sm text-gray-600 text-[12px]">Min. 1,000 kg</p>
-
-                <progress class="progress progress-success " value="70" max="100"></progress>
-
-                <div class="divider mt-[-6px] mb-[-2px]"></div>
-                    <p class="text-sm text-gray-600 text-[12px]">Supplier: Uncle Taks Farm Supply</p>   
-                    <p class="text-sm text-gray-600 text-[12px]">Last restock: 2024-06-01</p>   
-            </div> -->
 
         </div>
 

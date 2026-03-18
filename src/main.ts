@@ -29,7 +29,9 @@ import {
     ClipboardList,
     TriangleAlert,
     Layers,
-    TrendingDown
+    TrendingDown,
+    MoveLeft,
+    PhilippinePeso
 
 } from 'lucide-vue-next';
 
@@ -65,5 +67,7 @@ app.component("ClipboardList", ClipboardList)
 app.component("TriangleAlert", TriangleAlert)
 app.component("Layers", Layers)
 app.component("TrendingDown", TrendingDown)
+app.component("MoveLeft", MoveLeft)
+app.component("PhilippinePeso", PhilippinePeso)
 
 app.mount('#app')

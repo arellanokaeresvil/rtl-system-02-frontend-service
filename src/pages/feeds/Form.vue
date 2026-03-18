@@ -7,9 +7,7 @@
             <form @submit.prevent="SubmitForm" class="border-gray-300 h-auto w-250 p-3 rounded-lg border bg-white flex-row justify-between ">
 
                 <div class="flex-row  p-4">
-                    <h1 class="font-bold text-lg">Feed Form</h1>
-                   
-
+                
                          <fieldset class="fieldset">
                             <legend class="fieldset-legend">Name</legend>
                             <input type="text" class="input w-full" v-model="form.name" placeholder="Feed Name..." required/>
@@ -106,8 +104,8 @@ const SubmitForm = async () => {
     //   let res = await batch.updateBatch(form)
     //   if(res) router.push('/batches')
     // }else{
-      let res = await feedStore.createFeeds(form)
-      if(res) router.push('/feeds')
+       await feedStore.createFeeds(form)
+     
     // }
 
 }
