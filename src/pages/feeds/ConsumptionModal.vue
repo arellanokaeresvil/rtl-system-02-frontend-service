@@ -40,8 +40,9 @@
                                 class="input validator w-full"
                                 required
                                 placeholder="Enter feeds quantity consumed (kg)..."
-                                min="1"
-                                v-model="form.quantity_kg"
+                                min="0"
+                                step="any"
+                                v-model.number="form.quantity_kg"
                                 
                                 />
                         </fieldset>
@@ -54,7 +55,7 @@
                      <fieldset class="fieldset">
                             <legend class="fieldset-legend">Remarks</legend>
                         <textarea class="textarea w-full" placeholder="Enter remarks..." v-model="form.remarks"></textarea>
-                        </fieldset>
+                    </fieldset>
                 </div>
 
                 </div>
@@ -109,7 +110,7 @@ const form = reactive<ConsumptionForm>({
 const resetForm = () => {
     form.feed_id = ''
     form.batch_id = ''
-    form.used_at = ''
+    form.used_at = new Date().toISOString().split('T')[0] ?? '',
     form.quantity_kg = 0
     form.remarks = ''
 }

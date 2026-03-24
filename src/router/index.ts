@@ -74,6 +74,11 @@ const routes = [
                 component: () => import('../pages/sale/Sale.vue')
             },
             {
+                path: '/sales/create',
+                name: 'Create Sales',
+                component: () => import('../pages/sale/Form.vue')
+            },
+            {
                 path: '/users',
                 name: 'Users',
                 component: () => import('../pages/user/User.vue')

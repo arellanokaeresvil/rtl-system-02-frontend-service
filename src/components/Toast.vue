@@ -1,12 +1,12 @@
 <template>
     <div v-if="toast.visible" class="toast toast-top toast-end">
-    <div v-if="toast.type === 'error'" class="alert alert-error">
+    <div v-if="toast.type === 'error'" class="alert alert-error text-white">
         <span>{{ toast.message }}</span>
     </div>
     <div v-else-if="toast.type === 'success'" class="alert alert-success">
         <span>{{ toast.message }}</span>
     </div>
-    <div v-else class="alert alert-info">
+    <div v-else class="alert alert-info text-white">
         <span>{{ toast.message }}</span>
     </div>
     </div>

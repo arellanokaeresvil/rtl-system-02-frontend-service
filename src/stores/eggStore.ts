@@ -104,9 +104,10 @@ export const useEggStore = defineStore('egg',{
                }
 
                await Promise.all(requests)
+                 router.push('/egg-production')
                this.clearData();
 
-               router.push('/egg-production')
+             
 
             } catch (e) {
                throw e;

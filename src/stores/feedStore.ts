@@ -72,8 +72,7 @@ export const useFeedStore = defineStore('feed', {
         async createFeeds(data: any) {
                 this.loading = true
                 try {
-                    const res = await axios.post(`${baseURL}`, data)
-                    // this.datas.push(res.data.data)
+                    await axios.post(`${baseURL}`, data)
                     router.push('/feeds')
                     return true
                 } catch (error: any) {

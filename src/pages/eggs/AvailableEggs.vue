@@ -10,7 +10,7 @@
                     </div>
                     <div v-for="grade in gradeMapping" :key="grade.code" class="bg-white border border-gray-300 rounded-lg p-3 shadow-lg flex-col justify-between items-center">
                             <p class="text-[13px] text-gray-600">{{ grade.label }}</p>
-                            <p class="text-2xl font-bold">{{ eggAvail.eggAvailable?.filter((item: any) => item.grade === grade.code).reduce((acc:number, item: any) => acc + item.count, 0) || 0 }}</p>
+                            <p class="text-2xl font-bold">{{ eggAvail.eggAvailable?.filter((item: any) => item.grade === grade.code).reduce((acc:number, item: any) => acc + item.count, 0) || 0 }}</p>  
                     </div>
 
 
