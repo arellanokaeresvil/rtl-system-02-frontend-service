@@ -16,7 +16,7 @@
        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-5">
         <div class="cursor-pointer" v-for="value in feedStore.byTypeDatas" :key="value.type">
            
-            <div class="border rounded-lg bg-white border-gray-300 p-6 " v-if="value.total_quantity_kg > 200">
+            <div class="border rounded-lg bg-white border-gray-300 p-6 shadow-xl " v-if="value.total_quantity_kg > 200">
                 <router-link :to="`/feeds/list/${value.type}`">
                 <Layers size="24" />
 
@@ -32,7 +32,7 @@
                  </router-link>    
             </div>
           
-            <div class="border rounded-lg bg-white border-red-500 p-6" v-else>
+            <div class="border rounded-lg bg-white border-red-500 p-6 shadow-xl" v-else>
                 <router-link :to="`/feeds/list/${value.type}`">
                 <div class="flex justify-between items-center">
                     <Layers size="24" /> <TriangleAlert size="20" class="text-red-700" />

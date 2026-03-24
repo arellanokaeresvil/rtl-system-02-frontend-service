@@ -1,6 +1,6 @@
 import axios from 'axios';
 import router from './router';
-import { useToastStore } from './stores';
+import { useToastStore, useAuthStore } from './stores';
 
 
 
@@ -23,8 +23,14 @@ apiClient.interceptors.response.use(
   response => response,
   error => {
      const toast = useToastStore();
+     const auth = useAuthStore()
+     
     if (error.response?.status === 401) {
-      router.push('/login');
+      auth.clearSession()
+
+      if (router.currentRoute.value.path !== '/login') {
+        router.replace('/login')
+      }
     }
 
     if(error.response?.status === 422){
@@ -36,6 +42,16 @@ apiClient.interceptors.response.use(
             }
     
             toast.show(errors|| 'Validation error', 'error');
+    }
+    if(error.response?.status === 500){
+            const item = error.response.data.errors;
+            let errors = "";
+            for (const key in item) {
+                errors += `${item[key]}`;
+                break
+            }
+    
+            toast.show('Internal Server Error', 'error');
     }
  
     return Promise.reject(error);

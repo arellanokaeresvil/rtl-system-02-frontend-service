@@ -1,10 +1,14 @@
 <template>
     <div class="m-5">
-         <ContentHeader title="Feed Form" description="Feed Form Management" :isCreateBtn="false" />
+         <ContentHeader 
+          title="Feed & Inventory Management" 
+        description="Track feed inventory and consumption" 
+         :isCreateBtn="false" 
+         />
 
          <div class="flex justify-center items-center">
 
-            <form @submit.prevent="SubmitForm" class="border-gray-300 h-auto w-250 p-3 rounded-lg border bg-white flex-row justify-between ">
+            <form @submit.prevent="SubmitForm" class="border-gray-300 h-auto w-250 p-3 rounded-lg border bg-white flex-row justify-between mt-5 ">
 
                 <div class="flex-row  p-4">
                 
@@ -48,6 +52,7 @@
                                 required
                                 placeholder="Type feeds cost per kg..."
                                 min="1"
+                                step="any"
                                 v-model="form.cost_per_kg"
                                 />
                         </fieldset>
@@ -99,12 +104,12 @@ const form = reactive<FeedForm>({
 });
 
 
-const SubmitForm = async () => {
+const SubmitForm = () => {
     // if(route.params.id){
     //   let res = await batch.updateBatch(form)
     //   if(res) router.push('/batches')
     // }else{
-       await feedStore.createFeeds(form)
+        feedStore.createFeeds(form)
      
     // }
 

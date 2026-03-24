@@ -17,6 +17,11 @@ export const useAuthStore = defineStore('auth', {
   },
 
   actions: {
+    clearSession() {
+      this.user = null
+      this.token = null
+      localStorage.removeItem('rtl-token')
+    },
 
     async login(credentials: any) {
       this.loading = true
@@ -62,11 +67,10 @@ export const useAuthStore = defineStore('auth', {
 
         try {
             await axios.post('/logout');
-            this.user = null
-            this.token = null
-            localStorage.removeItem('rtl-token')
+            this.clearSession()
             router.push('/login')
         } catch (error) {
+            this.clearSession()
             throw error
         }
       
