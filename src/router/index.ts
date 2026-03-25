@@ -69,6 +69,21 @@ const routes = [
                 component: () => import('../pages/expenses/Expense.vue')
             },
             {
+                path: '/expenses/create',
+                name: 'Create Expenses',
+                component: () => import('../pages/expenses/Form.vue')
+            },
+            {
+                path: '/expenses/create-category',
+                name: 'Create Expense Category',
+                component: () => import('../pages/expenses/CategoryForm.vue')
+            },
+             {
+                path: '/expenses/edit-category/:id',
+                name: 'Edit  Expense Category',
+                 component: () => import('../pages/expenses/CategoryForm.vue')
+            },
+            {
                 path: '/sales',
                 name: 'Sales',
                 component: () => import('../pages/sale/Sale.vue')
