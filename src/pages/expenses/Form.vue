@@ -70,7 +70,7 @@
                       <router-link to="/expenses"  class="btn bg-gray-300 text-gray-700 p-3 rounded-lg w-m">Cancel</router-link>
                     <button class="btn btn-black">
                         <span v-if="useExpense.btn_loading" class="loading"></span>
-                        <span>Submit</span>
+                        <span>{{ route.params.id ? 'Update':'Submit'}}</span>
                     </button>
                 </div>
                 </div>
@@ -86,9 +86,11 @@
 import { onMounted, reactive } from 'vue';
 import ContentHeader from '../../components/ContentHeader.vue';
 import { useBatchStore, useExpenseStore } from '../../stores';
+import { useRoute } from 'vue-router';
 
 const batch = useBatchStore()
 const useExpense = useExpenseStore()
+const route = useRoute()
 
 interface ExpenseForm{
     batch_id: string;
@@ -108,14 +110,27 @@ const form = reactive<ExpenseForm>({
     description: ''
 })
 
-onMounted(()=>{
-    batch.getOptions()
-    useExpense.getCategoriesOptions()
+onMounted( async ()=>{
+    await batch.getOptions()
+    await useExpense.getCategoriesOptions()
+        if(route.params.id){
+        const res = await useExpense.showExpense(route.params.id)
+        console.log('res',res)
+        form.batch_id = res.data?.data?.batch_id
+        form.expense_category_id = res.data?.data?.expense_category_id
+        form.expense_date = res.data?.data?.expense_date
+        form.amount = res.data?.data?.amount
+        form.reference_no = res.data?.data?.reference_no
+        form.description = res.data?.data?.description
+        }
 })
 
 const handleSubmit = () => {
-    console.log('form', form)
+     if(route.params.id){
+        useExpense.updateExpense(form, route.params.id)
+    }else{
     useExpense.createExpense(form)
+    }
 }
 
 </script>
