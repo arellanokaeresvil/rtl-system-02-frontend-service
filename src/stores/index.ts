@@ -4,3 +4,4 @@ export * from './toastStore';
 export * from './eggStore';
 export * from './feedStore';
 export * from './saleStore';
+export * from './expenseStroe';
