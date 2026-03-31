@@ -15,7 +15,7 @@
                     <div class="ml-2">
                         <span class="text-white text-sm opacity-85 ">Total Expenses({{ monthName }})</span>
                     </div> 
-                     <span class="text-4xl text-white inline-flex items-center opacity-90 font-extrabold">{{ formatted( expenses.totalExpense) }}</span>
+                     <span class="text-4xl text-white inline-flex items-center opacity-90 font-extrabold">{{ formatToPeso( expenses.totalExpense) }}</span>
                 </div>
                 <div class="flex flex-1 h-10  justify-end pr-5">
                     <div class="rounded-xl glass w-15 h-15 text-white opacity-80 items-center flex justify-center -mt-2"><PhilippinePeso size="35"/></div>
@@ -36,7 +36,7 @@
 
                     <div v-for="item in expenses.summary" class="border border-gray-300 border-t-7 border-t-gray-400 shadow-xl rounded-lg bg-white p-6">
                         <h1 class="font-extrabold text-m mb-2">{{ item.name }}</h1>
-                        <h1 class="font-extrabold text-xl inline-flex items-center">{{ formatted(item.total_amount) }}</h1>
+                        <h1 class="font-extrabold text-xl inline-flex items-center">{{ formatToPeso(item.total_amount) }}</h1>
                         <span class="block text-gray-500 text-sm">{{ item.percentage }}% of total</span>
                     </div>
 
@@ -158,9 +158,11 @@ import Skeleton from '../../components/Skeleton.vue';
 import NoData from '../../components/NoData.vue';
 import { useExpenseStore } from '../../stores';
 import { onMounted } from 'vue';
+import { usePesoFormat } from '../../composable/pesoFormat';
 
 const expenses = useExpenseStore();
 const monthName = new Date().toLocaleString('en-US', { month: 'long' });
+const formatToPeso = usePesoFormat;
 
 const parameter = {
     limit: 10,
@@ -180,15 +182,6 @@ const index = () =>{
 const removeExpense = async (id:string) =>{
     await expenses.deleteExpense(id)
     index()
-}
-
-const formatted = (amount: string) => {
-    const formatPeso =  new Intl.NumberFormat('en-PH', {
-    style: 'currency',
-    currency: 'PHP'
-    }).format(amount);
-
-    return formatPeso;
 }
 
 

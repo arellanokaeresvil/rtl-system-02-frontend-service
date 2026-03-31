@@ -56,10 +56,10 @@ export const useFeedStore = defineStore('feed', {
             }
         },
 
-        async getOptions() {
+        async getOptions(payload:any) {
             // this.loading = true
             try {
-                const res = await axios.get(`${baseURL}/options`)
+                const res = await axios.get(`${baseURL}/options`, { params: {...payload} })
                 this.options = res.data.data
             } catch (error: any) {
                 this.error = error.response?.data?.message || 'Something went wrong'
