@@ -47,7 +47,9 @@
                      <td>Feed</td>
                     <td>Date Consumed</td>
                     <td>Feed Type</td>
+                    <td>Cost (kg)</td>
                     <td>Quantity (kg)</td>
+                    <td>Total Cost</td>
                    </tr>
                 </thead>
                 
@@ -57,7 +59,9 @@
                      <td>{{ `${items.feed?.feed_code} - ${items.feed?.name}`  }}</td>
                     <td>{{ items.used_at }}</td>
                     <td>{{ items.feed?.type.charAt(0).toUpperCase() + items.feed?.type.slice(1) }}</td>
-                    <td class="font-bold">{{ items.quantity_kg }}</td>
+                    <td>{{ formatToPeso(items.feed?.cost_per_kg) }}</td>
+                    <td>{{ items.quantity_kg }}</td>
+                    <td class="font-bold">{{ formatToPeso(parseInt(items.feed?.cost_per_kg)*items.quantity_kg) }}</td>
                 </tr>
 
             </tbody>
@@ -81,16 +85,18 @@ import { useFeedStore, useBatchStore } from '../../stores';
 import { onMounted } from 'vue';
 import ConsumptionModal from './ConsumptionModal.vue';
 import NoData from '../../components/NoData.vue';
+import { usePesoFormat } from '../../composable/pesoFormat';
 
 const feedStore = useFeedStore();
 const batch = useBatchStore()
+const formatToPeso = usePesoFormat
 
 onMounted(async() =>{
     await feedStore.fetchConsumedFeeds({limit:20})
 })
 
 const addRecord = async() =>{
-    await feedStore.getOptions()
+    // await feedStore.getOptions()
     await batch.getOptions()
 }
 

@@ -7,14 +7,25 @@
                     <div>
 
                          <fieldset class="fieldset">
-                            <legend class="fieldset-legend">Feed</legend>
-                            <select class="select w-full" v-model="form.feed_id" required>
-                                <option disabled value="" >Pick feed</option>
+                            <legend class="fieldset-legend">Feed Type</legend>
+                            <select @change="fetchFeedOptions()" class="select w-full" required v-model="form.type">
+                                <option disabled value="" >Select feed type</option>
+                                <option value="layer"> Layer </option>
+                                <option value="pre-layer"> Pre-Layer </option>
+                                <option value="grower"> Grower </option>
+                            </select>
+                        </fieldset>
+
+                         <fieldset class="fieldset">
+                            <legend class="fieldset-legend">Feed <span class="opacity-40">(First-In First-Out (FIFO) rule)</span></legend>
+                            <select class="select w-full" v-model="form.feed_id" required :disabled="form.type == ''">
+                                <option disabled value="" >Pick feed (note: top list first stocks)</option>
                                 <option v-for="value in feeds.options" :key="value.id" :value="value.id">
-                                    {{ value.feed_code }} - {{ value.name }} ({{ value.type }})
+                                    {{ value.feed_code }} - {{ value.name }}
                                 </option>
                             </select>
                         </fieldset>
+
                          <fieldset class="fieldset">
                             <legend class="fieldset-legend">Date Consumed</legend>
                             <input type="date" class="input w-full" v-model="form.used_at" required/>
@@ -27,7 +38,7 @@
                             <legend class="fieldset-legend">Batch</legend>
                            <select class="select w-full" v-model="form.batch_id" required>
                                 <option disabled  value="">Pick batch</option>
-                                <option v-for="value in batch.batchOptions" :key="value.id" :value="value.id">
+                                <option @click="computeQuantity(value)" v-for="value in batch.batchOptions" :key="value.id" :value="value.id">
                                     {{ value.batch_code }} - {{ value.breed }}
                                 </option>
                             </select>
@@ -43,20 +54,24 @@
                                 min="0"
                                 step="any"
                                 v-model.number="form.quantity_kg"
-                                
+                                disabled
                                 />
                         </fieldset>
+                         <fieldset class="fieldset">
+                            <legend class="fieldset-legend">Remarks</legend>
+                        <textarea class="textarea w-full" placeholder="Enter remarks..." v-model="form.remarks"></textarea>
+                    </fieldset>
 
                     </div>
                   
                         
               
-                <div class="col-span-2">
+                <!-- <div class="col-span-2">
                      <fieldset class="fieldset">
                             <legend class="fieldset-legend">Remarks</legend>
                         <textarea class="textarea w-full" placeholder="Enter remarks..." v-model="form.remarks"></textarea>
                     </fieldset>
-                </div>
+                </div> -->
 
                 </div>
                 
@@ -97,6 +112,7 @@ interface ConsumptionForm{
     used_at: string;
     quantity_kg: number;
     remarks: string
+    type:string
 }
 
 const form = reactive<ConsumptionForm>({
@@ -104,7 +120,8 @@ const form = reactive<ConsumptionForm>({
     batch_id: '',
     used_at: new Date().toISOString().split('T')[0] ?? '',
     quantity_kg: 0,
-    remarks: ''
+    remarks: '',
+    type: ''
 })
 
 const resetForm = () => {
@@ -112,7 +129,23 @@ const resetForm = () => {
     form.batch_id = ''
     form.used_at = new Date().toISOString().split('T')[0] ?? '',
     form.quantity_kg = 0
-    form.remarks = ''
+    form.remarks = '',
+    form.type
+}
+
+const computeQuantity = (batch: any) => {
+    let daily_feed_grams_per_bird = batch.daily_feed_per_bird_kg
+    let remaining_quantity = batch.current_quantity
+
+    form.quantity_kg = (daily_feed_grams_per_bird * remaining_quantity) / 1000
+}
+
+const fetchFeedOptions = () => {
+    const parameter = {
+        type: form.type
+    }
+    console.log('par',parameter)
+    feeds.getOptions(parameter)
 }
 
 const handleSubmit = async () =>{

@@ -20,7 +20,7 @@
                                 <p class="opacity-60 text-sm">{{ item.sold_at }}</p>
                             </div>
                             
-                                   <span class="font-bold text-2xl inline-flex items-center opacity-80 text-green-800"><PhilippinePeso size="21"/> {{ item.total_amount }}</span>
+                                   <span class="font-bold text-2xl inline-flex items-center opacity-80 text-green-800"> {{ formatToPeso(item.total_amount) }}</span>
                             
 
                            </div>
@@ -32,7 +32,7 @@
                                  <p class="opacity-60 text-sm">Quantity: <span class="text-black opacity-100 font-extrabold">{{ item.quantity }}</span></p>
                             </div>
                             <div class="flex-1">
-                                 <p class="opacity-60 text-sm">Unit Price: <span class="text-black opacity-100 font-extrabold inline-flex"> <PhilippinePeso size="15"/>{{ item.price }}</span></p>
+                                 <p class="opacity-60 text-sm">Unit Price: <span class="text-black opacity-100 font-extrabold inline-flex"> {{ formatToPeso(item.price) }}</span></p>
                             </div>
                             <div class="flex-1">
                                  <p class="opacity-60 text-sm">Notes: <span class="text-black opacity-100 font-extrabold text-">{{ item.notes }}</span></p>
@@ -55,7 +55,9 @@
 
 <script setup lang="ts">
 import NoData from '../../components/NoData.vue';
+import { usePesoFormat } from '../../composable/pesoFormat';
 import { useSalesStore } from '../../stores';
 
 const sale = useSalesStore()
+const formatToPeso = usePesoFormat
 </script>

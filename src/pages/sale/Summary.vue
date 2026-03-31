@@ -7,7 +7,7 @@
                     <TrendingUp size="20"/>
                 </div>
 
-                <span class="font-bold text-3xl inline-flex items-center opacity-90"><PhilippinePeso size="30"/> {{ sales.data?.total_revenue || 0 }}</span>
+                <span class="font-bold text-3xl inline-flex items-center opacity-90"> {{ formatToPeso(sales.data?.total_revenue ) }}</span>
 
             </div>
 
@@ -17,7 +17,7 @@
                     <p class="text-sm opacity-70">Egg Sales</p>
                 </div>
 
-                <span class="font-bold text-2xl inline-flex items-center opacity-80 text-blue-600"><PhilippinePeso size="21"/> {{ sales.data?.egg_sales || 0}}</span>
+                <span class="font-bold text-2xl inline-flex items-center opacity-80 text-blue-600"> {{ formatToPeso(sales.data?.egg_sales )}}</span>
 
             </div>
             <div class="border border-gray-300 bg-white rounded-lg p-6 shadow-xl">
@@ -25,7 +25,7 @@
                     <p class="text-sm opacity-70">Bird Sales</p>
                 </div>
 
-                <span class="font-bold text-2xl inline-flex items-center opacity-80 text-green-600"><PhilippinePeso size="21"/> {{ sales.data?.bird_sales || 0}}</span>
+                <span class="font-bold text-2xl inline-flex items-center opacity-80 text-green-600"> {{ formatToPeso(sales.data?.bird_sales || 0)}}</span>
 
             </div>
 
@@ -34,7 +34,9 @@
 </template>
 
 <script setup lang="ts">
+import { usePesoFormat } from '../../composable/pesoFormat';
 import { useSalesStore } from '../../stores';
 
 const sales = useSalesStore()
+const formatToPeso = usePesoFormat
 </script>
